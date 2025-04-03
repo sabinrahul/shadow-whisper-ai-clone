@@ -11,10 +11,77 @@ import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Brain, Upload, CheckCircle2, Mail, MessageSquare, Calendar } from "lucide-react";
+import { Brain, Upload, CheckCircle2, Mail, MessageSquare, Calendar, AlertTriangle } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 const PersonalizationPanel = () => {
+  const [emailSample, setEmailSample] = useState("");
+  const [chatSample, setChatSample] = useState("");
+  const [isTraining, setIsTraining] = useState(false);
+  const [selectedDecisions, setSelectedDecisions] = useState({
+    emailPriority: 50,
+    meetingTime: "afternoon",
+    communicationStyle: "friendly"
+  });
+
+  const handleEmailSampleChange = (e) => {
+    setEmailSample(e.target.value);
+  };
+
+  const handleChatSampleChange = (e) => {
+    setChatSample(e.target.value);
+  };
+
+  const handleAddSample = (type) => {
+    if (type === "email" && emailSample.trim()) {
+      // In a real implementation, this would send the sample to an AI training endpoint
+      toast({
+        title: "Email Sample Added",
+        description: "Your email sample has been added to the training data.",
+      });
+      setEmailSample("");
+    } else if (type === "chat" && chatSample.trim()) {
+      toast({
+        title: "Chat Sample Added",
+        description: "Your chat messages have been added to the training data.",
+      });
+      setChatSample("");
+    } else {
+      toast({
+        title: "Empty Sample",
+        description: "Please provide a sample before adding.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleSelectMeetingTime = (time) => {
+    setSelectedDecisions({...selectedDecisions, meetingTime: time});
+  };
+
+  const handleSelectCommunicationStyle = (style) => {
+    setSelectedDecisions({...selectedDecisions, communicationStyle: style});
+  };
+
+  const handleSliderChange = (value) => {
+    setSelectedDecisions({...selectedDecisions, emailPriority: value[0]});
+  };
+
+  const handleSaveTrainingData = () => {
+    setIsTraining(true);
+    
+    // Simulate AI training process
+    setTimeout(() => {
+      toast({
+        title: "Training Complete",
+        description: "Your AI has been updated with the new training data.",
+      });
+      setIsTraining(false);
+    }, 3000);
+  };
+
   return (
     <div className="space-y-4">
       <Card>
@@ -72,9 +139,8 @@ const PersonalizationPanel = () => {
       </Card>
       
       <Tabs defaultValue="train">
-        <TabsList className="grid grid-cols-2 w-full">
+        <TabsList className="grid grid-cols-1 w-full">
           <TabsTrigger value="train">Train AI</TabsTrigger>
-          <TabsTrigger value="preferences">Preferences</TabsTrigger>
         </TabsList>
         
         <TabsContent value="train" className="space-y-4 mt-4">
@@ -93,9 +159,11 @@ const PersonalizationPanel = () => {
                     id="email-sample" 
                     placeholder="Paste a sample email that represents your style..."
                     className="mt-1.5 h-32"
+                    value={emailSample}
+                    onChange={handleEmailSampleChange}
                   />
                   <div className="mt-2 flex justify-end">
-                    <Button>
+                    <Button onClick={() => handleAddSample("email")}>
                       <Upload className="mr-2 h-4 w-4" />
                       Add Sample
                     </Button>
@@ -108,9 +176,11 @@ const PersonalizationPanel = () => {
                     id="chat-sample" 
                     placeholder="Paste sample chat messages that represent your style..."
                     className="mt-1.5 h-32"
+                    value={chatSample}
+                    onChange={handleChatSampleChange}
                   />
                   <div className="mt-2 flex justify-end">
-                    <Button>
+                    <Button onClick={() => handleAddSample("chat")}>
                       <Upload className="mr-2 h-4 w-4" />
                       Add Sample
                     </Button>
@@ -119,7 +189,7 @@ const PersonalizationPanel = () => {
                 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label>Or connect your accounts</Label>
+                    <Label>Or connect your accounts for automatic training</Label>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <Button variant="outline" className="justify-start">
@@ -134,6 +204,21 @@ const PersonalizationPanel = () => {
                       <Calendar className="mr-2 h-4 w-4" />
                       Calendar
                     </Button>
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 mt-6">
+                  <div className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-amber-500 mr-3 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-amber-800">Important Training Notes</h4>
+                      <ul className="mt-2 text-sm text-amber-700 space-y-1 list-disc pl-5">
+                        <li>Provide diverse examples of your communication style for better AI learning</li>
+                        <li>Include both formal and casual examples for a well-rounded AI twin</li>
+                        <li>The more samples you provide, the more accurate your AI will be</li>
+                        <li>Connect accounts for automatic analysis of your communication patterns</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -165,7 +250,12 @@ const PersonalizationPanel = () => {
                           <span className="text-xs">Within hours</span>
                           <span className="text-xs">Within a day</span>
                         </div>
-                        <Slider defaultValue={[50]} max={100} step={1} />
+                        <Slider 
+                          defaultValue={[selectedDecisions.emailPriority]} 
+                          max={100} 
+                          step={1} 
+                          onValueChange={handleSliderChange}
+                        />
                       </div>
                     </div>
                   </div>
@@ -182,9 +272,27 @@ const PersonalizationPanel = () => {
                         When scheduling meetings, what time of day do you prefer?
                       </p>
                       <div className="mt-4 grid grid-cols-3 gap-2">
-                        <Button variant="outline" size="sm">Morning</Button>
-                        <Button variant="default" size="sm">Afternoon</Button>
-                        <Button variant="outline" size="sm">Evening</Button>
+                        <Button 
+                          variant={selectedDecisions.meetingTime === "morning" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectMeetingTime("morning")}
+                        >
+                          Morning
+                        </Button>
+                        <Button 
+                          variant={selectedDecisions.meetingTime === "afternoon" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectMeetingTime("afternoon")}
+                        >
+                          Afternoon
+                        </Button>
+                        <Button 
+                          variant={selectedDecisions.meetingTime === "evening" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectMeetingTime("evening")}
+                        >
+                          Evening
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -201,10 +309,34 @@ const PersonalizationPanel = () => {
                         How would you describe your typical communication style?
                       </p>
                       <div className="mt-4 grid grid-cols-2 gap-2">
-                        <Button variant="outline" size="sm">Brief & Direct</Button>
-                        <Button variant="default" size="sm">Friendly & Detailed</Button>
-                        <Button variant="outline" size="sm">Formal & Professional</Button>
-                        <Button variant="outline" size="sm">Casual & Conversational</Button>
+                        <Button 
+                          variant={selectedDecisions.communicationStyle === "brief" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectCommunicationStyle("brief")}
+                        >
+                          Brief & Direct
+                        </Button>
+                        <Button 
+                          variant={selectedDecisions.communicationStyle === "friendly" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectCommunicationStyle("friendly")}
+                        >
+                          Friendly & Detailed
+                        </Button>
+                        <Button 
+                          variant={selectedDecisions.communicationStyle === "formal" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectCommunicationStyle("formal")}
+                        >
+                          Formal & Professional
+                        </Button>
+                        <Button 
+                          variant={selectedDecisions.communicationStyle === "casual" ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => handleSelectCommunicationStyle("casual")}
+                        >
+                          Casual & Conversational
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -212,99 +344,23 @@ const PersonalizationPanel = () => {
               </div>
               
               <div className="mt-6">
-                <Button className="w-full">
-                  <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Save Training Data
+                <Button 
+                  className="w-full" 
+                  onClick={handleSaveTrainingData}
+                  disabled={isTraining}
+                >
+                  {isTraining ? (
+                    <>
+                      <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
+                      Training in Progress...
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="mr-2 h-4 w-4" />
+                      Save Training Data
+                    </>
+                  )}
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        
-        <TabsContent value="preferences" className="space-y-4 mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">AI Behavior Preferences</CardTitle>
-              <CardDescription>
-                Control how your AI twin represents you
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div>
-                  <Label className="text-base">Response Tone</Label>
-                  <div className="mt-2">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>Professional</span>
-                      <span>Balanced</span>
-                      <span>Casual</span>
-                    </div>
-                    <Slider defaultValue={[50]} max={100} step={1} />
-                  </div>
-                </div>
-                
-                <div>
-                  <Label className="text-base">Response Length</Label>
-                  <div className="mt-2">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>Concise</span>
-                      <span>Moderate</span>
-                      <span>Detailed</span>
-                    </div>
-                    <Slider defaultValue={[70]} max={100} step={1} />
-                  </div>
-                </div>
-                
-                <div>
-                  <Label className="text-base">Decision Making Autonomy</Label>
-                  <div className="mt-2">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>Always Ask</span>
-                      <span>Smart Decisions</span>
-                      <span>Full Autonomy</span>
-                    </div>
-                    <Slider defaultValue={[30]} max={100} step={1} />
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t">
-                  <h3 className="font-medium text-base mb-3">Approval Requirements</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-approval" className="cursor-pointer">Email Responses</Label>
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm">Always</Button>
-                        <Button variant="default" size="sm">Important Only</Button>
-                        <Button variant="outline" size="sm">Never</Button>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="meeting-approval" className="cursor-pointer">Meeting Scheduling</Label>
-                      <div className="flex items-center space-x-2">
-                        <Button variant="default" size="sm">Always</Button>
-                        <Button variant="outline" size="sm">Important Only</Button>
-                        <Button variant="outline" size="sm">Never</Button>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="chat-approval" className="cursor-pointer">Chat Responses</Label>
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm">Always</Button>
-                        <Button variant="default" size="sm">Important Only</Button>
-                        <Button variant="outline" size="sm">Never</Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <Button className="w-full">
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
-                    Save Preferences
-                  </Button>
-                </div>
               </div>
             </CardContent>
           </Card>
