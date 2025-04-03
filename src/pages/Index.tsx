@@ -10,6 +10,7 @@ import Dashboard from "@/components/Dashboard";
 import PersonalizationPanel from "@/components/PersonalizationPanel";
 import AutomationPanel from "@/components/AutomationPanel";
 import VoicePanel from "@/components/VoicePanel";
+import SettingsPanel from "@/components/SettingsPanel";
 import Header from "@/components/Header";
 
 const Index = () => {
@@ -142,15 +143,7 @@ const Index = () => {
                 <VoicePanel />
               </TabsContent>
               <TabsContent value="settings">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Settings</CardTitle>
-                    <CardDescription>Manage your AI twin settings and preferences</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>Settings panel content will be implemented in the next phase.</p>
-                  </CardContent>
-                </Card>
+                <SettingsPanel />
               </TabsContent>
             </Tabs>
           </div>
