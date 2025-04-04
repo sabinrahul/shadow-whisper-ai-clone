@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -12,8 +13,91 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Mic, Play, Square, Volume2, Headphones, Save } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
 
 const VoicePanel = () => {
+  const { toast } = useToast();
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordingProgress, setRecordingProgress] = useState(0);
+  const [recordingTime, setRecordingTime] = useState(0);
+  const [trainingProgress, setTrainingProgress] = useState(35);
+  
+  // Simulate recording audio
+  const handleStartRecording = () => {
+    if (isRecording) return;
+    
+    setIsRecording(true);
+    toast({
+      title: "Recording Started",
+      description: "Your voice is now being recorded...",
+    });
+    
+    // Simulate recording progress updates
+    const progressInterval = setInterval(() => {
+      setRecordingProgress(prev => {
+        const newProgress = prev + 5;
+        if (newProgress >= 100) {
+          clearInterval(progressInterval);
+          return 100;
+        }
+        return newProgress;
+      });
+      
+      setRecordingTime(prev => prev + 1);
+    }, 1000);
+  };
+  
+  // Simulate stopping recording
+  const handleStopRecording = () => {
+    if (!isRecording) return;
+    
+    setIsRecording(false);
+    toast({
+      title: "Recording Complete",
+      description: "Your voice sample has been recorded.",
+    });
+    
+    // Simulate API call to backend
+    setTimeout(() => {
+      // This would be where you'd send the recording to your backend
+      toast({
+        title: "Processing Voice Sample",
+        description: "Uploading and processing your voice recording...",
+      });
+      
+      // Simulate successful processing
+      setTimeout(() => {
+        setTrainingProgress(prev => Math.min(prev + 10, 100));
+        toast({
+          title: "Voice Training Updated",
+          description: "Your new voice sample has been processed and added to your voice profile.",
+          variant: "success",
+        });
+        
+        // Reset recording state
+        setRecordingProgress(0);
+        setRecordingTime(0);
+      }, 3000);
+    }, 1500);
+  };
+  
+  // Simulate saving voice settings
+  const handleSaveVoiceSettings = () => {
+    toast({
+      title: "Saving Voice Settings",
+      description: "Your voice customization settings are being saved...",
+    });
+    
+    // Simulate API call to backend
+    setTimeout(() => {
+      toast({
+        title: "Settings Saved",
+        description: "Your voice settings have been saved successfully.",
+        variant: "success",
+      });
+    }, 2000);
+  };
+
   return (
     <div className="space-y-4">
       <Card>
@@ -30,13 +114,13 @@ const VoicePanel = () => {
               <div className="flex flex-col border rounded-lg p-4">
                 <div className="flex justify-between mb-2">
                   <span className="text-sm">Voice Training</span>
-                  <span className="text-sm text-muted-foreground">35% Complete</span>
+                  <span className="text-sm text-muted-foreground">{trainingProgress}% Complete</span>
                 </div>
-                <Progress value={35} className="h-2" />
+                <Progress value={trainingProgress} className="h-2" />
                 
                 <div className="mt-4">
                   <p className="text-sm text-muted-foreground">Minimum recording required: 10 minutes</p>
-                  <p className="text-sm text-muted-foreground">Recorded so far: 3.5 minutes</p>
+                  <p className="text-sm text-muted-foreground">Recorded so far: {(trainingProgress / 10).toFixed(1)} minutes</p>
                 </div>
                 
                 <div className="mt-4">
@@ -53,9 +137,7 @@ const VoicePanel = () => {
               <div className="border rounded-lg p-4">
                 <div className="flex items-center justify-center h-24 bg-muted rounded-md mb-4">
                   <p className="text-muted-foreground text-center px-4">
-                    {
-                      "35% trained voice sample"
-                    }
+                    {trainingProgress}% trained voice sample
                   </p>
                 </div>
                 
@@ -100,19 +182,36 @@ const VoicePanel = () => {
                   </div>
                   
                   <div className="flex items-center justify-center space-x-4 py-4">
-                    <Button variant="outline" size="icon" className="h-12 w-12 rounded-full">
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      className={`h-12 w-12 rounded-full ${isRecording ? 'bg-red-100 text-red-600 border-red-300' : ''}`}
+                      onClick={handleStartRecording}
+                      disabled={isRecording}
+                    >
                       <Mic className="h-6 w-6" />
                     </Button>
-                    <Button variant="outline" size="icon" className="h-10 w-10 rounded-full">
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      className="h-10 w-10 rounded-full"
+                      onClick={handleStopRecording}
+                      disabled={!isRecording}
+                    >
                       <Square className="h-4 w-4" />
                     </Button>
                   </div>
                   
                   <div className="flex items-center mt-2">
                     <div className="h-8 flex-1 bg-muted rounded-md flex items-center">
-                      <div className="h-full w-0 rounded-md bg-primary"></div>
+                      <div 
+                        className="h-full rounded-md bg-primary transition-all duration-300" 
+                        style={{ width: `${recordingProgress}%` }}
+                      ></div>
                     </div>
-                    <span className="text-xs text-muted-foreground ml-2 whitespace-nowrap">0:00</span>
+                    <span className="text-xs text-muted-foreground ml-2 whitespace-nowrap">
+                      {Math.floor(recordingTime / 60)}:{String(recordingTime % 60).padStart(2, '0')}
+                    </span>
                   </div>
                 </div>
                 
@@ -145,9 +244,11 @@ const VoicePanel = () => {
                       <div>
                         <div className="flex justify-between mb-1">
                           <span className="text-xs">Script #1</span>
-                          <span className="text-xs text-muted-foreground">Not Started</span>
+                          <span className="text-xs text-muted-foreground">
+                            {recordingProgress > 0 ? `${recordingProgress}%` : 'Not Started'}
+                          </span>
                         </div>
-                        <Progress value={0} className="h-1.5" />
+                        <Progress value={recordingProgress} className="h-1.5" />
                       </div>
                       <div>
                         <div className="flex justify-between mb-1">
@@ -175,7 +276,7 @@ const VoicePanel = () => {
                 </div>
                 
                 <div className="pt-2">
-                  <Button disabled>
+                  <Button disabled={recordingProgress < 100}>
                     <Save className="mr-2 h-4 w-4" />
                     Save Recordings & Continue
                   </Button>
@@ -254,7 +355,7 @@ const VoicePanel = () => {
                 </div>
                 
                 <div className="pt-2">
-                  <Button className="w-full">
+                  <Button className="w-full" onClick={handleSaveVoiceSettings}>
                     <Save className="mr-2 h-4 w-4" />
                     Save Voice Settings
                   </Button>
@@ -273,7 +374,20 @@ const VoicePanel = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Voice testing and refinement tools will be implemented in the next phase.</p>
+              <p className="text-muted-foreground mb-4">
+                Once you've recorded enough voice samples, you can test how your AI voice sounds and make refinements.
+              </p>
+              
+              <Button 
+                onClick={() => {
+                  toast({
+                    title: "Feature Coming Soon",
+                    description: "Voice testing functionality will be available in the next update.",
+                  });
+                }}
+              >
+                Generate Voice Sample
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
