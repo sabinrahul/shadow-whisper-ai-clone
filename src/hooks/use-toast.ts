@@ -1,4 +1,3 @@
-
 import * as React from "react"
 
 import type {
@@ -138,7 +137,9 @@ function handleDismiss(toastId: string) {
   toastTimeouts.set(toastId, timeout)
 }
 
-type Toast = Omit<ToasterToast, "id">
+type Toast = Omit<ToasterToast, "id"> & {
+  variant?: "default" | "destructive" | "success"
+}
 
 function toast(props: Toast) {
   const id = genId()
