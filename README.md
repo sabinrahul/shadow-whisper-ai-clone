@@ -1,73 +1,81 @@
-# Welcome to your shadow man project
 
-## Project info
+# Shadow Man Full-Stack Application
 
-**URL**: https://shadow man.dev/projects/b0557cd0-1fa3-4338-8746-904aa531f640
+A complete web application featuring a React frontend and Express/MongoDB backend.
 
-## How can I edit this code?
+## Project Structure
 
-There are several ways of editing your application.
+- `/client` - React frontend (this directory)
+- `/server` - Express.js backend with MongoDB
 
-**Use shadow man**
+## Features
 
-Simply visit the [shadow man Project](https://shadow man.dev/projects/b0557cd0-1fa3-4338-8746-904aa531f640) and start prompting.
+- Dashboard with AI assistant metrics
+- Notes management (CRUD operations)
+- AI chat functionality
+- Responsive UI with modern design
 
-Changes made via shadow man will be committed automatically to this repo.
+## Technologies Used
 
-**Use your preferred IDE**
+### Frontend
+- React with TypeScript
+- React Router for navigation
+- TanStack Query for data fetching
+- Tailwind CSS for styling
+- Shadcn UI components
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in shadow man.
+### Backend
+- Node.js with Express
+- MongoDB with Mongoose
+- RESTful API architecture
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Getting Started
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js (v14 or newer)
+- MongoDB (running locally or accessible via connection string)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Setup and Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. Clone the repository
+2. Install dependencies for both frontend and backend:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd server
+npm install
+```
+
+3. Start the MongoDB server (if running locally)
+
+4. Start the backend server:
+
+```bash
+# In the server directory
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+5. Start the frontend development server:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# In the project root
+npm run dev
+```
 
-**Use GitHub Codespaces**
+6. Open your browser and navigate to http://localhost:8080
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Available Scripts
 
-## What technologies are used for this project?
+In the project directory, you can run:
 
-This project is built with:
+- `npm run dev` - Runs the app in development mode
+- `npm run build` - Builds the app for production
+- `npm run preview` - Preview the production build
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [shadow man](https://shadow man.dev/projects/b0557cd0-1fa3-4338-8746-904aa531f640) and click on Share -> Publish.
-
-## Can I connect a custom domain to my shadow man project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.shadow man.dev/tips-tricks/custom-domain#step-by-step-guide)
+In the server directory, you can run:
+- `npm run dev` - Runs the server with nodemon for auto-reloading
+- `npm start` - Runs the server in production mode
