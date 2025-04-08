@@ -1,7 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { checkBackendHealth } from '@/utils/api';
-import { Wifi, WifiOff, LogIn, UserPlus } from 'lucide-react';
+import { Wifi, WifiOff, LogIn, UserPlus, Home } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
@@ -61,8 +62,9 @@ const Header = () => {
             <nav className="mr-4">
               <ul className="flex space-x-6">
                 <li>
-                  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
-                    Dashboard
+                  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1">
+                    <Home className="h-4 w-4" />
+                    Home
                   </Link>
                 </li>
                 <li>
