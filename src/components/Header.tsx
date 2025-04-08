@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { checkBackendHealth } from '@/utils/api';
-import { Wifi, WifiOff, LogIn, UserPlus, Home } from 'lucide-react';
+import { Wifi, WifiOff, LogIn, UserPlus, Home, Book, MessageSquare } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
@@ -62,19 +62,21 @@ const Header = () => {
             <nav className="mr-4">
               <ul className="flex space-x-6">
                 <li>
-                  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1">
+                  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
                     <Home className="h-4 w-4" />
-                    Home
+                    <span>Home</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-primary">
-                    Notes
+                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
+                    <Book className="h-4 w-4" />
+                    <span>Notes</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-primary">
-                    Chat
+                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
+                    <MessageSquare className="h-4 w-4" />
+                    <span>Chat</span>
                   </Link>
                 </li>
               </ul>
