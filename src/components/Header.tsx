@@ -26,19 +26,19 @@ const Header = () => {
             <nav className="mr-4">
               <ul className="flex space-x-6">
                 <li>
-                  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
+                  <Link to="/" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
                     <Home className="h-4 w-4" />
                     <span>Home</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
+                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
                     <Book className="h-4 w-4" />
                     <span>Notes</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-1.5">
+                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
                     <MessageSquare className="h-4 w-4" />
                     <span>Chat</span>
                   </Link>

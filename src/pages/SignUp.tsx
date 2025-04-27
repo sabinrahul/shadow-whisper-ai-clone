@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -72,9 +71,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-700 to-indigo-900">      
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-100 to-purple-200">      
       <main className="flex-1 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-white/80 backdrop-blur-sm">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
             <CardDescription className="text-center">
@@ -193,7 +192,11 @@ const SignUp = () => {
                   )}
                 />
                 
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-purple-600 hover:bg-purple-700 transition-colors text-white" 
+                  disabled={isLoading}
+                >
                   {isLoading ? "Creating account..." : "Create account"}
                 </Button>
               </form>
@@ -201,13 +204,13 @@ const SignUp = () => {
           </CardContent>
           
           <CardFooter className="flex flex-col items-center justify-center space-y-2">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-primary hover:underline">
+              <Link to="/login" className="text-purple-600 hover:text-purple-700 hover:underline">
                 Login
               </Link>
             </div>
-            <Link to="/landing" className="text-sm text-muted-foreground hover:underline">
+            <Link to="/landing" className="text-sm text-gray-600 hover:text-gray-700 hover:underline">
               Back to main page
             </Link>
           </CardFooter>

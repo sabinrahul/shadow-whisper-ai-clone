@@ -66,9 +66,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-700 to-indigo-900">      
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-100 to-purple-200">      
       <main className="flex-1 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-white/80 backdrop-blur-sm">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
             <CardDescription className="text-center">
@@ -84,10 +84,10 @@ const Login = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-gray-700">Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <User className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
                           <Input 
                             placeholder="your@email.com" 
                             className="pl-10" 
@@ -105,10 +105,10 @@ const Login = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="text-gray-700">Password</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
                           <Input 
                             type="password" 
                             placeholder="******" 
@@ -122,7 +122,11 @@ const Login = () => {
                   )}
                 />
                 
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-purple-600 hover:bg-purple-700 transition-colors text-white" 
+                  disabled={isLoading}
+                >
                   {isLoading ? "Signing in..." : "Sign In"}
                 </Button>
               </form>
@@ -130,13 +134,13 @@ const Login = () => {
           </CardContent>
           
           <CardFooter className="flex flex-col items-center justify-center space-y-2">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-gray-600">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-primary hover:underline">
+              <Link to="/signup" className="text-purple-600 hover:text-purple-700 hover:underline">
                 Sign up
               </Link>
             </div>
-            <Link to="/landing" className="text-sm text-muted-foreground hover:underline">
+            <Link to="/landing" className="text-sm text-gray-600 hover:text-gray-700 hover:underline">
               Back to main page
             </Link>
           </CardFooter>
