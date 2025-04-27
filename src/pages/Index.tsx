@@ -17,7 +17,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-purple-50">
       <Header />
       
       <main className="container mx-auto px-4 py-6">

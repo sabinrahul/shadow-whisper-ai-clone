@@ -8,21 +8,21 @@ const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-700 to-indigo-900 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-purple-100 flex flex-col items-center justify-center p-4">
       <div className="max-w-4xl w-full text-center mb-12">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to Shadow Man</h1>
-        <p className="text-xl text-gray-200 mb-8">Your personal AI digital twin assistant</p>
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Welcome to Shadow Man</h1>
+        <p className="text-xl text-gray-600 mb-8">Your personal AI digital twin assistant</p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <Card className="bg-white/10 backdrop-blur-sm border-none">
+        <div className="flex flex-col items-center justify-center max-w-md mx-auto space-y-4">
+          <Card className="w-full bg-white/90 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl text-white">New User?</CardTitle>
-              <CardDescription className="text-gray-200">Create your account to get started</CardDescription>
+              <CardTitle className="text-2xl text-gray-900">New User?</CardTitle>
+              <CardDescription className="text-gray-600">Create your account to get started</CardDescription>
             </CardHeader>
             <CardContent className="flex justify-center">
               <Button 
                 size="lg" 
-                className="w-full bg-white text-purple-900 hover:bg-gray-200 transition-colors"
+                className="w-full bg-gray-900 text-white hover:bg-gray-800 transition-colors"
                 onClick={() => navigate('/signup')}
               >
                 Sign Up
@@ -30,16 +30,16 @@ const Landing = () => {
             </CardContent>
           </Card>
           
-          <Card className="bg-white/10 backdrop-blur-sm border-none">
+          <Card className="w-full bg-white/90 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl text-white">Returning User?</CardTitle>
-              <CardDescription className="text-gray-200">Sign in to access your digital twin</CardDescription>
+              <CardTitle className="text-2xl text-gray-900">Returning User?</CardTitle>
+              <CardDescription className="text-gray-600">Sign in to access your digital twin</CardDescription>
             </CardHeader>
             <CardContent className="flex justify-center">
               <Button 
                 size="lg"
                 variant="outline"
-                className="w-full border-white text-white hover:bg-white/20 transition-colors"
+                className="w-full border-gray-900 text-gray-900 hover:bg-gray-100 transition-colors"
                 onClick={() => navigate('/login')}
               >
                 Login
@@ -49,7 +49,7 @@ const Landing = () => {
         </div>
       </div>
       
-      <footer className="text-gray-300 text-sm mt-auto">
+      <footer className="text-gray-600 text-sm mt-auto">
         © 2025 Shadow Man - AI Digital Twin
       </footer>
     </div>
