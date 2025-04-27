@@ -26,19 +26,19 @@ const Header = () => {
             <nav className="mr-4">
               <ul className="flex space-x-6">
                 <li>
-                  <Link to="/" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
+                  <Link to="/" className="text-sm font-medium transition-colors hover:text-purple-500 flex items-center gap-1.5">
                     <Home className="h-4 w-4" />
                     <span>Home</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
+                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-purple-500 flex items-center gap-1.5">
                     <Book className="h-4 w-4" />
                     <span>Notes</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
+                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-purple-500 flex items-center gap-1.5">
                     <MessageSquare className="h-4 w-4" />
                     <span>Chat</span>
                   </Link>
@@ -49,7 +49,7 @@ const Header = () => {
             <div className="flex items-center">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-10 w-10 rounded-full p-0">
+                  <Button variant="ghost" className="h-10 w-10 rounded-full p-0 hover:bg-purple-100">
                     <Avatar>
                       <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
                     </Avatar>
@@ -57,14 +57,14 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
-                    <Link to="/profile" className="w-full flex items-center">Profile</Link>
+                    <Link to="/profile" className="w-full flex items-center hover:text-purple-500">Profile</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link to="/settings" className="w-full flex items-center">Settings</Link>
+                    <Link to="/settings" className="w-full flex items-center hover:text-purple-500">Settings</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Link to="/landing" className="w-full flex items-center">Log out</Link>
+                    <Link to="/landing" className="w-full flex items-center hover:text-purple-500">Log out</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

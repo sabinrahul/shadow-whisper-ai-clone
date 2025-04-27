@@ -34,7 +34,16 @@ const Profile = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <Button variant="outline" className="w-full">
+                <div className="space-y-2">
+                  <h3 className="font-medium text-lg">Account Information</h3>
+                  <div className="grid grid-cols-2 gap-1">
+                    <span className="text-muted-foreground">Username:</span>
+                    <span>johndoe</span>
+                    <span className="text-muted-foreground">Joined:</span>
+                    <span>April 15, 2023</span>
+                  </div>
+                </div>
+                <Button variant="outline" className="w-full hover:bg-purple-100">
                   Edit Profile
                 </Button>
                 <Button variant="destructive" className="w-full" onClick={handleLogout}>

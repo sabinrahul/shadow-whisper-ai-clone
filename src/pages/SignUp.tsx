@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,9 +72,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-100 to-purple-200">      
-      <main className="flex-1 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md bg-white/80 backdrop-blur-sm">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-50 to-purple-100">      
+      <main className="flex-1 flex items-center justify-center w-full p-4">
+        <Card className="w-full max-w-md bg-white/90 backdrop-blur-sm">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
             <CardDescription className="text-center">
@@ -194,7 +195,7 @@ const SignUp = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-purple-600 hover:bg-purple-700 transition-colors text-white" 
+                  className="w-full bg-purple-400 hover:bg-purple-500 transition-colors text-white" 
                   disabled={isLoading}
                 >
                   {isLoading ? "Creating account..." : "Create account"}
@@ -206,7 +207,7 @@ const SignUp = () => {
           <CardFooter className="flex flex-col items-center justify-center space-y-2">
             <div className="text-sm text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-purple-600 hover:text-purple-700 hover:underline">
+              <Link to="/login" className="text-purple-500 hover:text-purple-600 hover:underline">
                 Login
               </Link>
             </div>
