@@ -4,14 +4,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Lock, Mail } from 'lucide-react';
-import Header from '@/components/Header';
 import { Checkbox } from '@/components/ui/checkbox';
 
 const signupFormSchema = z.object({
@@ -49,8 +47,7 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      // This is a placeholder for actual signup logic
-      // In a real app, this would call an API endpoint
+      // This would be replaced with MongoDB integration in a real app
       console.log("Signup attempt with:", data);
       
       // Simulate API call delay
@@ -75,9 +72,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-700 to-indigo-900">      
       <main className="flex-1 flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
@@ -212,6 +207,9 @@ const SignUp = () => {
                 Login
               </Link>
             </div>
+            <Link to="/landing" className="text-sm text-muted-foreground hover:underline">
+              Back to main page
+            </Link>
           </CardFooter>
         </Card>
       </main>

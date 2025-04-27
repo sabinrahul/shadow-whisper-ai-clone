@@ -1,61 +1,25 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { checkBackendHealth } from '@/utils/api';
-import { Wifi, WifiOff, LogIn, UserPlus, Home, Book, MessageSquare } from 'lucide-react';
+import { Home, Book, MessageSquare, UserCircle } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
-  const [apiConnected, setApiConnected] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const checkConnection = async () => {
-      try {
-        const isConnected = await checkBackendHealth();
-        setApiConnected(isConnected);
-      } catch (error) {
-        console.error('Error checking API connection:', error);
-        setApiConnected(false);
-      }
-    };
-
-    checkConnection();
-
-    const interval = setInterval(checkConnection, 30000); // Check every 30 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <header className="bg-card border-b">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link to="/" className="font-bold text-xl">Shadow Man</Link>
-            
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <div className="ml-2 flex items-center">
-                    {apiConnected === null ? (
-                      <div className="w-4 h-4 rounded-full bg-gray-300 animate-pulse" />
-                    ) : apiConnected ? (
-                      <Wifi className="w-4 h-4 text-green-500" />
-                    ) : (
-                      <WifiOff className="w-4 h-4 text-red-500" />
-                    )}
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {apiConnected === null 
-                    ? "Checking API connection..." 
-                    : apiConnected 
-                      ? "API connected" 
-                      : "API disconnected - some features may not work"}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
           </div>
           
           <div className="flex items-center">
@@ -82,20 +46,28 @@ const Header = () => {
               </ul>
             </nav>
             
-            <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/login" className="flex items-center gap-2">
-                  <LogIn className="h-4 w-4" />
-                  <span>Login</span>
-                </Link>
-              </Button>
-              
-              <Button size="sm" asChild>
-                <Link to="/signup" className="flex items-center gap-2">
-                  <UserPlus className="h-4 w-4" />
-                  <span>Sign Up</span>
-                </Link>
-              </Button>
+            <div className="flex items-center">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-10 w-10 rounded-full p-0">
+                    <Avatar>
+                      <AvatarFallback className="bg-primary text-primary-foreground">SM</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link to="/profile" className="w-full flex items-center">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="/settings" className="w-full flex items-center">Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link to="/landing" className="w-full flex items-center">Log out</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
