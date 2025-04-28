@@ -25,20 +25,20 @@ const Header = () => {
             <nav className="mr-4">
               <ul className="flex space-x-6">
                 <li>
-                  <Link to="/" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
-                    <Home className="h-4 w-4 transition-colors group-hover:text-purple-600" />
+                  <Link to="/" className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 flex items-center gap-1.5">
+                    <Home className="h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-900" />
                     <span>Home</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/notes" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
-                    <Book className="h-4 w-4 transition-colors group-hover:text-purple-600" />
+                  <Link to="/notes" className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 flex items-center gap-1.5">
+                    <Book className="h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-900" />
                     <span>Notes</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="text-sm font-medium transition-colors hover:text-purple-600 flex items-center gap-1.5">
-                    <MessageSquare className="h-4 w-4 transition-colors group-hover:text-purple-600" />
+                  <Link to="/chat" className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 flex items-center gap-1.5">
+                    <MessageSquare className="h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-900" />
                     <span>Chat</span>
                   </Link>
                 </li>

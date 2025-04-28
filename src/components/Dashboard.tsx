@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-purple-50/50">
+        <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">AI Status</CardTitle>
           </CardHeader>
@@ -27,7 +27,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card className="bg-purple-50/50">
+        <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Pending Tasks</CardTitle>
           </CardHeader>
@@ -37,7 +37,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card className="bg-purple-50/50">
+        <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Accuracy Rate</CardTitle>
           </CardHeader>
@@ -48,7 +48,7 @@ const Dashboard = () => {
         </Card>
       </div>
       
-      <Card className="bg-purple-50/50">
+      <Card>
         <CardHeader>
           <CardTitle>Recent Activities</CardTitle>
           <CardDescription>
@@ -142,7 +142,7 @@ const Dashboard = () => {
       </Card>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="bg-purple-50/50">
+        <Card>
           <CardHeader>
             <CardTitle>Upcoming Tasks</CardTitle>
             <CardDescription>
@@ -178,7 +178,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card className="bg-purple-50/50">
+        <Card>
           <CardHeader>
             <CardTitle>AI Insights</CardTitle>
             <CardDescription>
