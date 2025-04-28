@@ -1,5 +1,5 @@
 
-# Shadow Man Full-Stack Application
+# Shadow Man AI Application
 
 A complete web application featuring a React frontend and Express/MongoDB backend.
 
