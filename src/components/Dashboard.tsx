@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -15,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
+        <Card className="bg-purple-50/50">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">AI Status</CardTitle>
           </CardHeader>
@@ -28,7 +27,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="bg-purple-50/50">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Pending Tasks</CardTitle>
           </CardHeader>
@@ -38,7 +37,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="bg-purple-50/50">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Accuracy Rate</CardTitle>
           </CardHeader>
@@ -49,7 +48,7 @@ const Dashboard = () => {
         </Card>
       </div>
       
-      <Card>
+      <Card className="bg-purple-50/50">
         <CardHeader>
           <CardTitle>Recent Activities</CardTitle>
           <CardDescription>
@@ -143,7 +142,7 @@ const Dashboard = () => {
       </Card>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
+        <Card className="bg-purple-50/50">
           <CardHeader>
             <CardTitle>Upcoming Tasks</CardTitle>
             <CardDescription>
@@ -179,7 +178,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="bg-purple-50/50">
           <CardHeader>
             <CardTitle>AI Insights</CardTitle>
             <CardDescription>
